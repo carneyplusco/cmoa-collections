@@ -1,0 +1,102 @@
+.object {
+  @include grid-media($large) {
+    padding: 0 $large-spacing;
+  }
+}
+
+.object__image {
+  width: 100%;
+  margin-bottom: $base-spacing;
+  text-align: center;
+
+  img {
+    max-height: 550px;
+  }
+}
+
+.object__actions {
+  display: flex;
+  justify-content: space-between;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+
+       + li {
+         margin-left: $small-spacing;
+       }
+
+       a:hover {
+         color: $action-color;
+       }
+    }
+  }
+
+  a {
+    color: $dark-gray;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover span {
+      text-decoration: none;
+    }
+
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  i {
+    vertical-align: -1px;
+  }
+}
+
+.object__attributes {
+  margin-bottom: $base-spacing;
+
+  td {
+    padding: $small-spacing / 2 0;
+
+    &.record a {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .label {
+    width: 30%;
+
+    @include grid-media($medium) {
+      width: 20%;
+    }
+  }
+}
+
+.copy-label {
+  &:after {
+    content: "Link copied!";
+    margin-left: $small-spacing / 2;
+    font-weight: normal;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &.copied:after {
+    opacity: 1;
+  }
+}
+
+.copy-input {
+  position: absolute;
+  left: -9999px;
+}

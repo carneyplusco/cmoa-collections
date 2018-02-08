@@ -1,0 +1,15 @@
+// BASE TABLE STYLES
+////////////////////////////////////////////////////////////////
+
+table {
+  border-collapse: collapse;
+  margin: $small-spacing 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+tr,
+td,
+th {
+  vertical-align: top;
+}

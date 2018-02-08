@@ -4,14 +4,19 @@
   "version": "1.0.0",
   "author": "Carney Dev Team <dev.team@carney.co>",
   "dependencies": {
+    "bourbon": "^4.3.4",
+    "bourbon-neat": "^2.1.0",
     "elasticsearch": "^14.1.0",
+    "file-loader": "^1.1.6",
     "gatsby": "^1.9.158",
     "gatsby-link": "^1.6.34",
     "gatsby-plugin-create-client-paths": "^1.0.4",
     "gatsby-plugin-react-helmet": "^2.0.3",
     "gatsby-plugin-sass": "^1.0.16",
+    "object-fit-images": "^3.2.3",
     "react-helmet": "^5.2.0",
-    "route-parser": "0.0.5"
+    "route-parser": "0.0.5",
+    "url-loader": "^0.6.2"
   },
   "keywords": [
     "gatsby"

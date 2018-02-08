@@ -1,0 +1,201 @@
+// BASE TYPOGRAPHY STYLES
+////////////////////////////////////////////////////////////////
+
+body {
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: 1em;
+  line-height: 1.5;
+  @include font-smoothing(on);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $base-font-family;
+  line-height: 1.2;
+  margin: 0 0 $small-spacing;
+
+  &.alt {
+    font-family: $alt-font-family;
+    font-weight: 800;
+  }
+
+  &.serif {
+    font-family: $secondary-font-family;
+    font-weight: 700;
+  }
+
+  &.no-pad {
+    margin-bottom: 0.5rem;
+  }
+
+  &.thin {
+    font-weight: 600;
+  }
+
+  &.thinner {
+    font-weight: 400;
+  }
+
+  &.lighter {
+    color: lighten($base-font-color, 25%);
+  }
+
+  &.upcase {
+    text-transform: uppercase;
+  }
+
+  a {
+    color: $dark-gray;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: $action-color;
+      outline: none;
+    }
+
+    section & {
+      text-decoration: none;
+    }
+
+    .icon-right, .icon-left {
+      font-size: 75%;
+    }
+  }
+}
+
+
+h1, .level-1 {
+  font-size: 2.33em;
+}
+
+h2, .level-2 {
+  font-size: 2em;
+}
+
+h3, .level-3 {
+  font-size: 1.75em;
+}
+
+h4, .level-4 {
+  font-size: 1.5em;
+}
+
+h5, .level-5 {
+  font-size: 1.25em;
+}
+
+h6, .level-6 {
+  font-size: 1em;
+}
+
+p {
+  margin: 0 0 $small-spacing;
+}
+
+a {
+  transition: color 0.2s;
+  color: #000;
+  text-decoration: none;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: $action-color;
+    outline: none;
+  }
+
+  section & {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+ul, ol {
+  padding-left: 20px;
+
+  li {
+    margin-bottom: $small-spacing / 2;
+    line-height: 1.25;
+  }
+
+}
+
+.list--blank {
+  list-style-type: none;
+}
+
+.list--inline {
+  @extend .list--blank;
+  padding-left: 0;
+  display: inline-block;
+  margin: 0;
+
+  & > li {
+    display: inline-block;
+    margin: 0 0.5em;
+  }
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+hr {
+  border-bottom: $base-border;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: $base-spacing 0;
+  &.thin {
+    margin-top: $small-spacing;
+    margin-bottom: $small-spacing;
+  }
+}
+
+// Alternate section colors
+////////////////////////////////////////////////////////////////
+%inverse {
+  color: $inverse-font-color;
+
+  a {
+    color: $action-color;
+
+    &:active,
+    &:focus,
+    &:hover  {
+      color: lighten($action-color, 20%);
+      outline: none;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $inverse-font-color;
+  }
+
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+  @include screen-reader-text;
+}
+
+main {
+  transform: rotate(-0.001deg); // shake off jagged characters in IE
+
+  @supports (-webkit-font-smoothing: antialiased) or (-moz-osx-font-smoothing: grayscale) {
+    transform: none;
+  }
+}

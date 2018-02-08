@@ -1,0 +1,46 @@
+// PRINT STYLES
+////////////////////////////////////////////////////////////////
+
+@media print {
+  nav {
+    margin-bottom: $base-spacing;
+  }
+
+  section.pad {
+    margin-left: $small-spacing;
+    margin-right: $small-spacing;
+  }
+
+  .nav__icon-container {
+    display: none;
+  }
+
+  #item-info {
+    page-break-before: always;
+
+    hr {
+      display: none;
+    }
+  }
+
+  .object__image img {
+    max-height: 100%;
+  }
+
+  .object__actions {
+    display: none;
+  }
+
+  .footer__logo-container {
+    @include grid-column(3);
+    @include grid-push(2);
+  }
+
+  .footer__links, .footer__social-media, .footer__copy a {
+    display: none;
+  }
+
+  .footer__copy {
+    text-align: center;
+  }
+}

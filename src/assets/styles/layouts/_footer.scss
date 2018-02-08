@@ -1,0 +1,158 @@
+footer {
+  padding: $large-spacing 0 $small-spacing 0;
+  border-top: 1px solid $light-medium-gray;
+}
+
+.footer__logo {
+  @include grid-column(4);
+
+  @include grid-media($small) {
+    @include grid-column(3);
+  }
+
+  @include grid-media($medium) {
+    @include grid-column(2);
+  }
+
+  @include grid-media($large) {
+    @include grid-column(2);
+  }
+}
+
+.footer__address {
+  @include grid-column(8);
+
+  @include grid-media($small) {
+    @include grid-column(9);
+  }
+
+  @include grid-media($medium) {
+    @include grid-column(4);
+  }
+
+  @include grid-media($large) {
+    @include grid-column(2);
+    @include grid-push(0.5);
+  }
+
+  small {
+    display: inline-block;
+  }
+}
+
+.footer__links {
+  @include grid-column(12);
+  margin-top: $small-spacing;
+
+  @include grid-media($medium) {
+    @include grid-column(6);
+    margin-top: 0;
+  }
+
+  @include grid-media($large) {
+    @include grid-column(4.5);
+    @include grid-push(0.5);
+  }
+
+  ul {
+    list-style: none;
+    column-count: 2;
+    margin: 0;
+    padding: 0;
+
+    @include grid-media($small) {
+      column-count: 3;
+    }
+  }
+
+  a {
+    color: black;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $action-color;
+    }
+  }
+}
+
+.footer__social-media {
+  @include grid-column(12);
+  margin-top: $base-spacing;
+  text-align: center;
+
+  @include grid-media($medium) {
+    margin-top: 0;
+  }
+
+  @include grid-media($large) {
+    @include grid-column(2.5);
+    text-align: left;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding:0;
+    margin-bottom: $small-spacing;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  a.bubble {
+    display: block;
+    line-height: 0;
+    font-size: 1.25em;
+    background: #c6c6c6;
+    color: #fff;
+    padding: 10px 0;
+    width: 40px;
+    margin-right: 4px;
+    border-radius: 50%;
+    text-align: center;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $dark-gray;
+    }
+  }
+}
+
+.footer__copy {
+  @include grid-column(12);
+  margin-top: $small-spacing;
+  text-align: center;
+
+  a:before {
+    display: inline-block;
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: #555;
+    vertical-align: 2px;
+    margin: 0 0.5em 0 0.25em;
+  }
+}
+
+.footer__app-link {
+  &:hover,
+  &:focus,
+  &:active {
+    svg {
+      path {
+        fill: #fff;
+      }
+
+      path[fill="#FFFFFF"] {
+        fill: #000;
+      }
+
+      path[fill="#A6A6A6"] {
+        fill: #000;
+      }
+    }
+  }
+}

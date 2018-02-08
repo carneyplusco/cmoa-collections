@@ -1,0 +1,38 @@
+.checkbox {
+  align-self: center;
+  color: #fff;
+  line-height: 1;
+}
+
+.checkbox [type="checkbox"] {
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height:1px; 
+  width:1px; 
+  margin:-1px; 
+  padding:0;
+  border:0;
+}
+
+.checkbox label {
+  cursor: pointer;
+  &:before {
+    content: "\00a0";
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    margin-right: 8px;
+    color: #fff;
+    border: 2px solid #fff;
+    vertical-align: 5px;
+  }
+}
+
+.checkbox [type="checkbox"]:checked + label:before {
+  content: "×";
+  font-size: 50px;
+  text-indent: -3px;
+  line-height: 26px;
+  vertical-align: -10px;
+}

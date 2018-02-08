@@ -1,0 +1,46 @@
+// SITE SECTIONS LAYOUT STYLES
+////////////////////////////////////////////////////////////////
+%section {
+  position: relative;
+  margin: $base-spacing 0;
+  z-index: 99;
+
+  &.pad {
+    @include grid-media($large) {
+      margin: $medium-spacing $large-spacing;
+    }
+
+    @include grid-media($extra-large) {
+      margin: $medium-spacing $extra-large-spacing;
+    }
+  }
+}
+
+.l-section {
+  @extend %section;
+  background: $base-background-color;
+}
+
+.l-section--secondary {
+  @extend %section;
+  @extend %inverse;
+  background: $secondary-background-color;
+}
+
+section {
+  @extend %section;
+
+  p {
+    font-size: 1.1em;
+  }
+}
+
+.primary {
+  @include grid-media($medium) {
+    margin-top: 9rem;
+
+    & > .l-container {
+      width: calc(100% - 220px);
+    }
+  }
+}
