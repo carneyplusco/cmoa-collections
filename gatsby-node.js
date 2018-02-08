@@ -6,6 +6,8 @@
 
 // You can delete this file if you're not using it
 
+const Webpack = require('webpack');
+
 exports.modifyWebpackConfig = ({ config }) => {
   config.loader('file-loader', {
     test: /\.(svg|png|jpg|gif|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -18,6 +20,14 @@ exports.modifyWebpackConfig = ({ config }) => {
     loader: 'url-loader',
     query: { name: '[folder]/[name].[ext]', limit: 5000 }
   });
+
+  config.plugin('webpack-define', Webpack.DefinePlugin, () => [
+    {
+      'process.env': {
+        ELASTIC_ENDPOINT: JSON.stringify(process.env.ELASTIC_ENDPOINT)
+      }
+    }
+  ]);
 
   return config;
 };
