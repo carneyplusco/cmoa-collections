@@ -6,8 +6,7 @@ import '../assets/styles/main.scss';
 const IndexPage = () => (
   <div>
     <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great!</p>
+    <p>Searching from {process.env.ELASTIC_ENDPOINT}</p>
     <p>
       <Link to="/things/6bd89462-6774-4617-bdfb-11bcb20c06ea">Go to bowl</Link>
     </p>
