@@ -3,23 +3,20 @@ import Route from 'route-parser';
 import elasticsearch from 'elasticsearch';
 
 const client = new elasticsearch.Client({
-  host: 'https://search-cmoa-collections-dev-yeorlt2ileqyrzesg35exbxa6y.us-east-1.es.amazonaws.com',
+  host: process.env.ELASTIC_ENDPOINT,
   log: 'trace'
 });
 
-const Thing = ({title}) => (
-  <h1>{title}</h1>
-);
+const Thing = ({ title }) => <h1>{title}</h1>;
 
-// const Thing = () => {
 class ThingPage extends React.Component {
   state = {
-    thing_data: null
-  }
+    thingData: null
+  };
 
   componentDidMount() {
     const route = new Route('/things/:thingId');
-    const { thingId } = route.match(location.pathname);
+    const { thingId } = route.match(window.location.pathname);
 
     client
       .get({
@@ -27,18 +24,14 @@ class ThingPage extends React.Component {
         type: 'thing',
         id: `cmoa:things/${thingId}`
       })
-      .then(thing => this.setState({thing_data: thing._source}));
+      .then(thing => this.setState({ thingData: thing._source }));
   }
-  
-  render() {
-    const { thing_data } = this.state;
-    const thing = thing_data ? <Thing {...thing_data} /> : null;
-    return (
-      <div>
-        {thing}
-      </div>
-    )
-  }
-};
 
-export default ThingPage
+  render() {
+    const { thingData } = this.state;
+    const thing = thingData ? <Thing {...thingData} /> : null;
+    return <div>{thing}</div>;
+  }
+}
+
+export default ThingPage;

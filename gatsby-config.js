@@ -1,12 +1,13 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'CMOA Collection Search'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sass',
     {
-      resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/things/*`] },
+      resolve: 'gatsby-plugin-create-client-paths',
+      options: { prefixes: ['/things/*'] }
     }
   ]
 };
