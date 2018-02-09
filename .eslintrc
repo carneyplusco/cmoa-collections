@@ -11,6 +11,7 @@
     "comma-dangle": ["warn", "never"],
     "no-underscore-dangle": "off",
     "import/no-extraneous-dependencies": "off",
+    "import/no-webpack-loader-syntax": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/anchor-is-valid": [
       "error",
@@ -20,5 +21,8 @@
         "aspects": ["noHref", "invalidHref", "preferButton"]
       }
     ]
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
