@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import Route from 'route-parser';
 import elasticsearch from 'elasticsearch';
 
@@ -7,7 +8,16 @@ const client = new elasticsearch.Client({
   log: 'trace'
 });
 
-const Thing = ({ title }) => <h1>{title}</h1>;
+const Thing = ({ title }) => (
+  <div className="section primary">
+    <div className="l-container">
+      <div className="l-full">
+        <Helmet title={`${title} | CMOA Collection Search`} />
+        <h1>{title}</h1>
+      </div>
+    </div>
+  </div>
+);
 
 class ThingPage extends React.Component {
   state = {
