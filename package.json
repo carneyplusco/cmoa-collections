@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "Carney Dev Team <dev.team@carney.co>",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.3",
+    "@fortawesome/fontawesome-free-brands": "^5.0.6",
+    "@fortawesome/react-fontawesome": "0.0.17",
     "bourbon": "^4.3.4",
     "bourbon-neat": "^2.1.0",
     "elasticsearch": "^14.1.0",

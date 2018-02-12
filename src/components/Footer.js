@@ -1,5 +1,7 @@
 import React from 'react';
 import InlineSVG from 'svg-inline-react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faTwitter, faFacebook, faInstagram, faVimeoV } from '@fortawesome/fontawesome-free-brands';
 import cmoaLogo from '!raw-loader!../assets/images/svg/logo-cmoa.svg';
 import appStoreLogo from '!raw-loader!../assets/images/svg/logo-app-store.svg';
 
@@ -63,23 +65,31 @@ const Footer = () => (
     <div className="footer__social-media">
       <ul>
         <li>
-          <a href="http://twitter.com/cmoa" className="bubble">
-            <i className="fab fa-twitter" title="Twitter" />
+          <a href="http://twitter.com/cmoa" className="bubble" aria-label="Follow CMOA on Twitter">
+            <FontAwesomeIcon icon={faTwitter} />
           </a>
         </li>
         <li>
-          <a href="http://www.facebook.com/CarnegieMuseumofArt" className="bubble">
-            <i className="fab fa-facebook" title="Facebook" />
+          <a
+            href="http://www.facebook.com/CarnegieMuseumofArt"
+            className="bubble"
+            aria-label="Follow CMOA on Facebook"
+          >
+            <FontAwesomeIcon icon={faFacebook} />
           </a>
         </li>
         <li>
-          <a href="http://instagram.com/thecmoa" className="bubble">
-            <i className="fab fa-instagram" title="Instagram" />
+          <a
+            href="http://instagram.com/thecmoa"
+            className="bubble"
+            aria-label="Follow CMOA on Instagram"
+          >
+            <FontAwesomeIcon icon={faInstagram} />
           </a>
         </li>
         <li>
-          <a href="http://vimeo.com/cmoa" className="bubble">
-            <i className="fab fa-vimeo-v" title="Vimeo" />
+          <a href="http://vimeo.com/cmoa" className="bubble" aria-label="Follow CMOA on Vimeo">
+            <FontAwesomeIcon icon={faVimeoV} />
           </a>
         </li>
       </ul>
