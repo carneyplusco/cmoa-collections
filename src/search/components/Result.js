@@ -12,7 +12,7 @@ const NoImage = ({ link = '#' }) => (
 
 const Result = ({ document }) => {
   const {
-    id, title, creators, creation_date: creationDate, images = []
+    id = '', title, creators = [], creation_date: creationDate = [], images = []
   } = document;
   const itemLink = `/things/${extractId(id)}`;
   const creatorLinks = creators.map(creator => (
@@ -31,8 +31,10 @@ const Result = ({ document }) => {
   ) : (
     <NoImage link={itemLink} />
   );
-  const date = creationDate.reduce((prev, current) => (prev === current ? current : `${prev} - ${current}`));
-
+  const date = creationDate.reduce(
+    (prev, current) => (!prev || prev === current ? current : `${prev} - ${current}`),
+    ''
+  );
   return (
     <li className="search-result l-container">
       <div className="search-result__info">

@@ -2,7 +2,9 @@ import * as types from '../constants/ActionTypes';
 
 const initialState = {
   search: {},
-  results: []
+  results: [],
+  resultCount: null,
+  totalCount: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,8 +12,11 @@ const rootReducer = (state = initialState, action) => {
     case types.SET_SEARCH:
       return { ...state, search: action.search };
 
+    case types.SET_TOTAL:
+      return { ...state, totalCount: action.totalCount };
+
     case types.SET_RESULTS:
-      return { ...state, results: action.results };
+      return { ...state, results: action.results, resultCount: action.resultCount };
 
     default:
       return state;

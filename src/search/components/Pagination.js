@@ -3,115 +3,72 @@ import queryString from 'query-string';
 import classNames from 'classnames';
 import Scroll from 'react-scroll';
 import shortid from 'shortid';
-import Results from './Results';
 
-const defaults = {
-  page: 1,
-  perPage: 10,
-  perPageMax: 100,
-  q: ''
-};
+const defaults = require('../constants/PaginationDefaults');
 
-const updateURLParams = (newParams) => {
-  const query =
-    typeof window !== 'undefined' ? queryString.parse(window.location.search) : defaults;
-
-  // save original param values (coerced to int) or set default if null
-  query.page = query.page ? parseInt(query.page, 10) : defaults.page;
-  query.perPage = query.perPage ? parseInt(query.perPage, 10) : defaults.perPage;
-
-  // update URL params if necessary
-  if (query.page !== newParams.page || query.perPage !== newParams.perPage) {
-    const newSearch = queryString.stringify(newParams);
-    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
-    const newURL = `${protocol}//${host}${pathname}?${newSearch}`;
-    window.history.pushState({ path: newURL }, '', newURL);
-  }
-};
-
-const getSanitizedURLParams = (resultCount) => {
-  const query =
-    typeof window !== 'undefined' ? queryString.parse(window.location.search) : defaults;
-
+function getSanitizedURLParams(resultCount, search) {
   // sanitize param values so they fall within our min/max values
-  const perPage = query.perPage
-    ? Math.min(Math.max(query.perPage, defaults.perPage), defaults.perPageMax)
+  const perPage = search.perPage
+    ? Math.min(Math.max(search.perPage, defaults.perPage), defaults.perPageMax)
     : defaults.perPage;
   const pageMax = Math.max(Math.ceil(resultCount / perPage), defaults.page);
-  const page = query.page ? Math.min(Math.max(query.page, defaults.page), pageMax) : defaults.page;
+  const page = search.page
+    ? Math.min(Math.max(search.page, defaults.page), pageMax)
+    : defaults.page;
 
-  query.perPage = perPage;
-  query.page = page;
-
-  return query;
-};
-
-const paginateResults = (results = []) => {
-  const params = getSanitizedURLParams(results.length);
-
-  if (results.length) {
-    updateURLParams(params);
-  }
-
-  const { perPage = defaults.perPage, page = defaults.page } = params;
-  const start = perPage * (page - 1);
-  const end = start + perPage;
-
-  return results.slice(start, end);
-};
-
-const PaginatedResults = ({ results = [], view = 'list' }) => {
-  const paginatedResults = paginateResults(results);
-
-  return <Results results={paginatedResults} view={view} />;
-};
+  return { ...search, perPage, page };
+}
 
 class ParamLink extends Component {
   static defaultProps = {
-    results: [],
+    resultCount: 0,
     param: 'page',
     value: 10,
-    className: ''
+    className: '',
+    search: {}
   };
 
   clickParamLink = (event) => {
     event.preventDefault();
-    const newSearch = getSanitizedURLParams(this.props.results.length);
-    newSearch[this.props.param] = this.props.value;
+    const {
+      resultCount = 0, search, param, value, setSearch
+    } = this.props;
+    const newSearch = { ...getSanitizedURLParams(resultCount, search), [param]: value };
     const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
     const newUrl = `${protocol}//${host}${pathname}?${queryString.stringify(newSearch)}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
-    this.props.setSearch(newSearch);
+    setSearch(newSearch);
     Scroll.animateScroll.scrollToTop();
   };
 
   render() {
-    const newSearch = getSanitizedURLParams(this.props.results.length);
-    newSearch[this.props.param] = this.props.value;
-    const search = queryString.stringify(newSearch);
+    const {
+      resultCount = 0, search, param, value, children, className
+    } = this.props;
+    const newSearch = { ...getSanitizedURLParams(resultCount, search), [param]: value };
     const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
-    const url = `${protocol}//${host}${pathname}?${search}`;
-
+    const url = `${protocol}//${host}${pathname}?${queryString.stringify(newSearch)}`;
     return (
-      <a href={url} className={this.props.className} onClick={this.clickParamLink}>
-        {this.props.children}
+      <a href={url} className={className} onClick={this.clickParamLink}>
+        {children}
       </a>
     );
   }
 }
 
-const Pagination = ({ results = [], setSearch = () => {} }) => {
-  const params = getSanitizedURLParams(results.length);
-  const pageMax = Math.max(Math.ceil(results.length / params.perPage), defaults.page);
+const Pagination = ({ resultCount = 0, search = {}, setSearch = () => {} }) => {
+  const params = getSanitizedURLParams(resultCount, search);
+  const pageMax = Math.max(Math.ceil(resultCount / params.perPage), defaults.page);
 
   // create previous / next page links
   const prevLink =
     params.page - 1 >= 1 ? (
       <ParamLink
-        results={results}
+        resultCount={resultCount}
         param="page"
         value={params.page - 1}
         className="prev"
+        search={search}
         setSearch={setSearch}
       >
         <span className="screen-reader-text">Previous</span>
@@ -124,10 +81,11 @@ const Pagination = ({ results = [], setSearch = () => {} }) => {
   const nextLink =
     params.page + 1 <= pageMax ? (
       <ParamLink
-        results={results}
+        resultCount={resultCount}
         param="page"
         value={params.page + 1}
         className="next"
+        search={search}
         setSearch={setSearch}
       >
         <span className="screen-reader-text">Next</span>
@@ -149,14 +107,14 @@ const Pagination = ({ results = [], setSearch = () => {} }) => {
     const lastInclude = include;
     include = current || start || middle || end;
     const className = classNames({ active: current, ellipses: !lastInclude && include });
-
     return !include ? null : (
       <li key={shortid.generate()} className={className}>
         <ParamLink
-          results={results}
+          resultCount={resultCount}
           param="page"
           value={page}
           className={className}
+          search={search}
           setSearch={setSearch}
         >
           <span aria-label={`Go to Page ${page}`} aria-current={current}>
@@ -170,7 +128,7 @@ const Pagination = ({ results = [], setSearch = () => {} }) => {
   // create "results per page" links
   const perPageOptions = [10, 20, 50, 100].filter(perPage =>
     // exclude if perPage value is greater than result set
-    perPage <= results.length);
+    perPage <= resultCount);
 
   const perPageLinks = perPageOptions.map((perPage) => {
     const current = params.perPage === perPage;
@@ -178,10 +136,11 @@ const Pagination = ({ results = [], setSearch = () => {} }) => {
     return (
       <li key={shortid.generate()} className={className}>
         <ParamLink
-          results={results}
+          resultCount={resultCount}
           param="perPage"
           value={perPage}
           className={className}
+          search={search}
           setSearch={setSearch}
         >
           {perPage}
@@ -225,4 +184,4 @@ const Pagination = ({ results = [], setSearch = () => {} }) => {
   );
 };
 
-export { PaginatedResults, Pagination };
+export { Pagination, getSanitizedURLParams };
