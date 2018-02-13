@@ -28,7 +28,7 @@ class App extends Component {
     const queryText = q ? `for "${q}" ` : '';
     const resultText = totalCount
       ? `${formatNumber(resultCount)} ${pluralize('result', resultCount)}
-      } ${queryText} out of ${formatNumber(totalCount)} records`
+      ${queryText} out of ${formatNumber(totalCount)} records`
       : 'Searching...';
 
     const resultList = results.map(result => (
