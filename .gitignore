@@ -2,6 +2,8 @@
 node_modules
 
 .cache/
+.env*
+!.env.development
 
 # Build directory
 public/*
