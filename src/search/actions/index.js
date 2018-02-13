@@ -60,7 +60,7 @@ export function setSearch() {
   return (dispatch) => {
     dispatch({
       type: types.SET_SEARCH,
-      search: queryString.parse(window.location.search)
+      search: typeof window !== 'undefined' ? queryString.parse(window.location.search) : {}
     });
     return dispatch(setResults());
   };

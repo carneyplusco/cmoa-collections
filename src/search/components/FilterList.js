@@ -59,7 +59,7 @@ export default class FilterList extends Component {
       ? values.filter(v => v !== value)
       : values.concat(value);
     const newSearch = { ...search, [type]: newValues };
-    const { protocol, host, pathname } = window.location;
+    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
     const newUrl = `${protocol}//${host}${pathname}?${queryString.stringify(newSearch)}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
     this.props.setSearch(newSearch);

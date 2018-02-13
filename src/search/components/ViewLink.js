@@ -7,7 +7,7 @@ export default class ViewLink extends Component {
     event.preventDefault();
     const { targetView = 'list' } = this.props;
     const newSearch = { ...this.props.search, view: targetView };
-    const { protocol, host, pathname } = window.location;
+    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
     const newUrl = `${protocol}//${host}${pathname}?${queryString.stringify(newSearch)}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
     this.props.setSearch(newSearch);
@@ -25,7 +25,10 @@ export default class ViewLink extends Component {
       'fa-list': targetView === 'list',
       'fa-th-large': targetView !== 'list'
     });
-    const newSearch = { ...queryString.parse(window.location.search), view: targetView };
+    const newSearch =
+      typeof window !== 'undefined'
+        ? { ...queryString.parse(window.location.search), view: targetView }
+        : {};
     const href = `/results?${queryString.stringify(newSearch)}`;
 
     return (

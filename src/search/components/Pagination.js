@@ -8,11 +8,13 @@ import Results from './Results';
 const defaults = {
   page: 1,
   perPage: 10,
-  perPageMax: 100
+  perPageMax: 100,
+  q: ''
 };
 
 const updateURLParams = (newParams) => {
-  const query = queryString.parse(window.location.search);
+  const query =
+    typeof window !== 'undefined' ? queryString.parse(window.location.search) : defaults;
 
   // save original param values (coerced to int) or set default if null
   query.page = query.page ? parseInt(query.page, 10) : defaults.page;
@@ -21,14 +23,15 @@ const updateURLParams = (newParams) => {
   // update URL params if necessary
   if (query.page !== newParams.page || query.perPage !== newParams.perPage) {
     const newSearch = queryString.stringify(newParams);
-    const { protocol, host, pathname } = window.location;
+    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
     const newURL = `${protocol}//${host}${pathname}?${newSearch}`;
     window.history.pushState({ path: newURL }, '', newURL);
   }
 };
 
 const getSanitizedURLParams = (resultCount) => {
-  const query = queryString.parse(window.location.search);
+  const query =
+    typeof window !== 'undefined' ? queryString.parse(window.location.search) : defaults;
 
   // sanitize param values so they fall within our min/max values
   const perPage = query.perPage
@@ -39,6 +42,7 @@ const getSanitizedURLParams = (resultCount) => {
 
   query.perPage = perPage;
   query.page = page;
+
   return query;
 };
 
@@ -74,7 +78,7 @@ class ParamLink extends Component {
     event.preventDefault();
     const newSearch = getSanitizedURLParams(this.props.results.length);
     newSearch[this.props.param] = this.props.value;
-    const { protocol, host, pathname } = window.location;
+    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
     const newUrl = `${protocol}//${host}${pathname}?${queryString.stringify(newSearch)}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
     this.props.setSearch(newSearch);
@@ -85,8 +89,9 @@ class ParamLink extends Component {
     const newSearch = getSanitizedURLParams(this.props.results.length);
     newSearch[this.props.param] = this.props.value;
     const search = queryString.stringify(newSearch);
-    const { protocol, host, pathname } = window.location;
+    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
     const url = `${protocol}//${host}${pathname}?${search}`;
+
     return (
       <a href={url} className={this.props.className} onClick={this.clickParamLink}>
         {this.props.children}
@@ -144,6 +149,7 @@ const Pagination = ({ results = [], setSearch = () => {} }) => {
     const lastInclude = include;
     include = current || start || middle || end;
     const className = classNames({ active: current, ellipses: !lastInclude && include });
+
     return !include ? null : (
       <li key={shortid.generate()} className={className}>
         <ParamLink

@@ -1,8 +1,7 @@
-import queryString from 'query-string';
 import * as types from '../constants/ActionTypes';
 
 const initialState = {
-  search: queryString.parse(window.location.search),
+  search: {},
   results: []
 };
 

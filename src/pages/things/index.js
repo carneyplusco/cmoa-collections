@@ -26,7 +26,7 @@ class ThingPage extends React.Component {
 
   componentDidMount() {
     const route = new Route('/things/:thingId');
-    const { thingId } = route.match(window.location.pathname);
+    const { thingId } = typeof window !== 'undefined' && route.match(window.location.pathname);
 
     client
       .get({
