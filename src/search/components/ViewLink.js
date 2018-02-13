@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import queryString from 'query-string';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faList, faThLarge } from '@fortawesome/fontawesome-free-solid';
 
 export default class ViewLink extends Component {
   clickViewLink = (event) => {
@@ -20,11 +22,7 @@ export default class ViewLink extends Component {
       [`${targetView}-link`]: true,
       active: targetView === view
     });
-    const iconClass = classNames({
-      fas: true,
-      'fa-list': targetView === 'list',
-      'fa-th-large': targetView !== 'list'
-    });
+    const icon = targetView === 'list' ? faList : faThLarge;
     const newSearch =
       typeof window !== 'undefined'
         ? { ...queryString.parse(window.location.search), view: targetView }
@@ -33,7 +31,7 @@ export default class ViewLink extends Component {
 
     return (
       <a className={linkClass} href={href} onClick={this.clickViewLink}>
-        <i className={iconClass} />
+        <FontAwesomeIcon icon={icon} />
         <span className="link-text">{targetView} view</span>
       </a>
     );
