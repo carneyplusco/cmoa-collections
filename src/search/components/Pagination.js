@@ -3,6 +3,8 @@ import queryString from 'query-string';
 import classNames from 'classnames';
 import Scroll from 'react-scroll';
 import shortid from 'shortid';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/fontawesome-free-solid';
 
 const defaults = require('../constants/PaginationDefaults');
 
@@ -72,7 +74,7 @@ const Pagination = ({ resultCount = 0, search = {}, setSearch = () => {} }) => {
         setSearch={setSearch}
       >
         <span className="screen-reader-text">Previous</span>
-        <i className="fas fa-chevron-left" />
+        <FontAwesomeIcon icon={faChevronLeft} />
       </ParamLink>
     ) : (
       ''
@@ -89,7 +91,7 @@ const Pagination = ({ resultCount = 0, search = {}, setSearch = () => {} }) => {
         setSearch={setSearch}
       >
         <span className="screen-reader-text">Next</span>
-        <i className="fas fa-chevron-right" />
+        <FontAwesomeIcon icon={faChevronRight} />
       </ParamLink>
     ) : (
       ''
