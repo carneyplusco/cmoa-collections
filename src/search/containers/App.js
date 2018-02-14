@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import pluralize from 'pluralize';
+import queryString from 'query-string';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/fontawesome-free-solid';
 import Filters from '../components/Filters';
 import Result from '../components/Result';
 import Results from '../components/Results';
@@ -17,6 +20,17 @@ class App extends Component {
   componentDidMount() {
     this.props.setSearch();
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { search, setSearch } = this.props;
+    const searchInput = event.target.querySelector('.search-input');
+    const newSearch = { ...search, q: searchInput.value };
+    const { protocol, host, pathname } = typeof window !== 'undefined' && window.location;
+    const newUrl = `${protocol}//${host}${pathname}?${queryString.stringify(newSearch)}`;
+    window.history.pushState({ path: newUrl }, '', newUrl);
+    setSearch(newSearch);
+  };
 
   render() {
     const {
@@ -36,21 +50,25 @@ class App extends Component {
     ));
 
     return (
-      <div className="collection">
-        <div className="l-container search-results-header">
-          <div className="l-long search-results-title">
+      <div className="collection section primary">
+        <div className="l-container">
+          <div className="l-shorter search-results-title">
             <h1 className="level-2 no-pad">Collection</h1>
-            <h2
-              className={classNames('level-3', 'thinner', {
-                hide: !q && !tag && !creator && !collection
-              })}
-            >
-              {resultText}
-            </h2>
           </div>
-          <div className="l-short view-links">
-            <ViewLink targetView="grid" search={search} setSearch={setSearch} />
-            <ViewLink targetView="list" search={search} setSearch={setSearch} />
+          <div className="l-longer">
+            <form className="search-form" action="/search" onSubmit={this.handleSubmit}>
+              <input
+                className="search-input"
+                name="q"
+                id="search"
+                type="search"
+                placeholder="Search the collection..."
+              />
+              <button className="search-button" type="submit">
+                <span className="screen-reader-text">Search</span>
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            </form>
           </div>
         </div>
         <div className="l-container">
@@ -58,6 +76,19 @@ class App extends Component {
             <Filters search={search} results={results} setSearch={setSearch} />
           </div>
           <div className="l-longer">
+            <header className="search-results-header">
+              <h2
+                className={classNames('search-results-count', 'level-5', 'thinner', {
+                  hide: !q && !tag && !creator && !collection
+                })}
+              >
+                {resultText}
+              </h2>
+              <div className="view-links">
+                <ViewLink targetView="grid" search={search} setSearch={setSearch} />
+                <ViewLink targetView="list" search={search} setSearch={setSearch} />
+              </div>
+            </header>
             <Results results={resultList} view={search.view} />
           </div>
         </div>

@@ -42,7 +42,7 @@ export default class Filters extends Component {
     const { search, setSearch } = this.props;
     return (
       <div>
-        <h3 className="level-5 lighter no-pad">Filter Results By:</h3>
+        <h3 className="search-filter-heading level-5 lighter no-pad">Filter Results</h3>
         <div className="quickview-nav quickview-nav--filter">
           <ul className="search-filters">
             {/*
