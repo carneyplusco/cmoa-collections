@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import pluralize from 'pluralize';
 import queryString from 'query-string';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/fontawesome-free-solid';
+import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
 import Filters from '../components/Filters';
 import Result from '../components/Result';
 import Results from '../components/Results';
