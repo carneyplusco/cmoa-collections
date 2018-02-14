@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import queryString from 'query-string';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faList, faThLarge } from '@fortawesome/fontawesome-free-solid';
+import faList from '@fortawesome/fontawesome-free-solid/faList';
+import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge';
 
 export default class ViewLink extends Component {
   clickViewLink = (event) => {

@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import Scroll from 'react-scroll';
 import shortid from 'shortid';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/fontawesome-free-solid';
+import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft';
+import faChevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight';
 
 const defaults = require('../constants/PaginationDefaults');
 

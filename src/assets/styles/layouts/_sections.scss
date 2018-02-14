@@ -36,6 +36,8 @@ section {
 }
 
 .primary {
+  margin-top: 1.5rem;
+
   @include grid-media($medium) {
     margin-top: 9rem;
 
