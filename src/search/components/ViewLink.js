@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import queryString from 'query-string';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faList from '@fortawesome/fontawesome-free-solid/faList';
-import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge';
 
 export default class ViewLink extends Component {
   clickViewLink = (event) => {
@@ -23,7 +21,7 @@ export default class ViewLink extends Component {
       [`${targetView}-link`]: true,
       active: targetView === view
     });
-    const icon = targetView === 'list' ? faList : faThLarge;
+    const icon = targetView === 'list' ? 'list' : 'th-large';
     const newSearch =
       typeof window !== 'undefined'
         ? { ...queryString.parse(window.location.search), view: targetView }
