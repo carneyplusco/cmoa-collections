@@ -40,9 +40,5 @@ section {
 
   @include grid-media($medium) {
     margin-top: 9rem;
-
-    & > .l-container {
-      width: calc(100% - 220px);
-    }
   }
 }

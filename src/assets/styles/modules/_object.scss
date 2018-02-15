@@ -26,26 +26,28 @@
     li {
       display: inline-block;
 
-       + li {
-         margin-left: $small-spacing;
-       }
+      + li {
+        margin-left: $small-spacing;
+      }
 
-       a:hover {
-         color: $action-color;
-       }
+      a:hover {
+        color: $action-color;
+      }
     }
   }
 
-  a {
-    color: $dark-gray;
+  .action {
+    @extend a;
     font-weight: 600;
-    text-decoration: none;
 
-    &:hover span {
-      text-decoration: none;
+    &:hover {
+      span {
+        text-decoration: none;
+      }
     }
 
-    span {
+    svg + span {
+      margin-left: $tiny-spacing;
       text-decoration: underline;
     }
   }
@@ -60,6 +62,10 @@
 
   td {
     padding: $small-spacing / 2 0;
+
+    &.value::first-letter {
+      text-transform: capitalize;
+    }
 
     &.record a {
       display: block;
@@ -91,8 +97,12 @@
     transition: opacity 0.2s ease;
   }
 
-  &.copied:after {
-    opacity: 1;
+  &.copied {
+    color: $red;
+
+    &::after {
+      opacity: 1;
+    }
   }
 }
 

@@ -63,34 +63,40 @@ h6 {
       text-decoration: none;
     }
 
-    .icon-right, .icon-left {
+    .icon-right,
+    .icon-left {
       font-size: 75%;
     }
   }
 }
 
-
-h1, .level-1 {
+h1,
+.level-1 {
   font-size: 2.33em;
 }
 
-h2, .level-2 {
+h2,
+.level-2 {
   font-size: 2em;
 }
 
-h3, .level-3 {
+h3,
+.level-3 {
   font-size: 1.75em;
 }
 
-h4, .level-4 {
+h4,
+.level-4 {
   font-size: 1.5em;
 }
 
-h5, .level-5 {
+h5,
+.level-5 {
   font-size: 1.25em;
 }
 
-h6, .level-6 {
+h6,
+.level-6 {
   font-size: 1em;
 }
 
@@ -102,6 +108,7 @@ a {
   transition: color 0.2s;
   color: #000;
   text-decoration: none;
+  cursor: pointer;
 
   &:active,
   &:focus,
@@ -118,14 +125,14 @@ a {
   }
 }
 
-ul, ol {
+ul,
+ol {
   padding-left: 20px;
 
   li {
     margin-bottom: $small-spacing / 2;
     line-height: 1.25;
   }
-
 }
 
 .list--blank {
@@ -170,7 +177,7 @@ hr {
 
     &:active,
     &:focus,
-    &:hover  {
+    &:hover {
       color: lighten($action-color, 20%);
       outline: none;
     }
@@ -184,7 +191,6 @@ hr {
   h6 {
     color: $inverse-font-color;
   }
-
 }
 
 /* Text meant only for screen readers. */

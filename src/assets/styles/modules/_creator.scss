@@ -1,0 +1,12 @@
+.creator__meta,
+.creator__nationality + .creator__lifespan {
+  margin-left: $small-spacing / 4;
+}
+
+.creator__meta::before {
+  content: "(";
+}
+
+.creator__meta::after {
+  content: ")";
+}

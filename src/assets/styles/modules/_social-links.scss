@@ -11,10 +11,11 @@
   white-space: nowrap;
   opacity: 0;
   z-index: -1;
-  transition: z-index .2s ease, opacity .2s ease, margin-top .2s ease;
+  transition: z-index 0.2s ease, opacity 0.2s ease, margin-top 0.2s ease;
   transform: translateX(-50%);
 
-  &:before, &:after {
+  &:before,
+  &:after {
     content: "";
     position: absolute;
     left: 50%;
@@ -24,14 +25,14 @@
 
   &:before {
     @include triangle(12px, #fff, up);
-    content: '';
+    content: "";
     bottom: calc(100% - 1px);
     z-index: 4;
   }
 
   &:after {
     @include triangle(12px, $medium-dark-gray, up);
-    content: '';
+    content: "";
     bottom: 100%;
     z-index: 3;
   }
@@ -43,6 +44,7 @@
   z-index: 2;
 }
 
-.sbg-button {
+.social-link {
+  @extend a;
   padding: 0 0.25rem;
 }

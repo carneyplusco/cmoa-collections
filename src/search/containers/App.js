@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import pluralize from 'pluralize';
 import queryString from 'query-string';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
 import Filters from '../components/Filters';
 import Result from '../components/Result';
 import Results from '../components/Results';
@@ -66,7 +65,7 @@ class App extends Component {
               />
               <button className="search-button" type="submit">
                 <span className="screen-reader-text">Search</span>
-                <FontAwesomeIcon icon={faSearch} />
+                <FontAwesomeIcon icon="search" />
               </button>
             </form>
           </div>
