@@ -1,8 +1,5 @@
 import React from 'react';
-
-function extractId(str) {
-  return str.split('/')[1] || '';
-}
+import { extractId } from '../../util';
 
 const NoImage = ({ link = '#' }) => (
   <a href={link} className="search-result__no-image">
@@ -10,11 +7,11 @@ const NoImage = ({ link = '#' }) => (
   </a>
 );
 
-const Result = ({ document }) => {
+const Result = ({ document, type }) => {
   const {
     id = '', title, creators = [], creation_date: creationDate = [], images = []
   } = document;
-  const itemLink = `/things/${extractId(id)}`;
+  const itemLink = `/${type}/${extractId(id)}`;
   const creatorLinks = creators.map(creator => (
     <a
       key={extractId(creator.id)}

@@ -10,6 +10,10 @@ import faChevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight';
 import faList from '@fortawesome/fontawesome-free-solid/faList';
 import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge';
 import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
+import faPrint from '@fortawesome/fontawesome-pro-regular/faPrint';
+import faLink from '@fortawesome/fontawesome-pro-regular/faLink';
+import faInfoCircle from '@fortawesome/fontawesome-free-solid/faInfoCircle';
+import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
 
 fontawesome.library.add(
   faShareSquare,
@@ -22,5 +26,9 @@ fontawesome.library.add(
   faChevronRight,
   faList,
   faThLarge,
-  faEnvelope
+  faEnvelope,
+  faPrint,
+  faLink,
+  faInfoCircle,
+  faSearch
 );
