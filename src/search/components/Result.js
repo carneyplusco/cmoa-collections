@@ -1,5 +1,8 @@
 import React from 'react';
+import pluralize from 'pluralize';
 import { extractId } from '../../util';
+
+pluralize.addPluralRule(/teenie$/i, 'teenie');
 
 const NoImage = ({ link = '#' }) => (
   <a href={link} className="search-result__no-image">
@@ -11,7 +14,7 @@ const Result = ({ document, type }) => {
   const {
     id = '', title, creators = [], creation_date: creationDate = [], images = []
   } = document;
-  const itemLink = `/${type}/${extractId(id)}`;
+  const itemLink = `/${pluralize(type)}/${extractId(id)}`;
   const creatorLinks = creators.map(creator => (
     <a
       key={extractId(creator.id)}
