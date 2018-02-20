@@ -1,27 +1,27 @@
 import React from 'react';
 import { extractId } from '../../util';
 
+function formatLifespan(birth, death) {
+  if (birth && !death) {
+    return `b. ${birth}`;
+  } else if (death && !birth) {
+    return `d. ${death}</span>`;
+  }
+  return `${birth}–${death}`;
+}
+
 const Creator = ({
   id, name, nationality, birth, death
-}) => {
-  const lifespan =
-    birth && death ? (
-      <span className="creator__lifespan">
-        {birth}&ndash;{death}
-      </span>
-    ) : null;
-
-  return (
-    <div className="creator">
-      <a key={extractId(id)} href={`/parties/${extractId(id)}`}>
-        {name}
-      </a>
-      <span className="creator__meta">
-        <span className="creator__nationality">{nationality}</span>
-        {lifespan}
-      </span>
-    </div>
-  );
-};
+}) => (
+  <div className="creator">
+    <a key={extractId(id)} href={`/parties/${extractId(id)}`}>
+      {name}
+    </a>
+    <span className="creator__meta">
+      <span className="creator__nationality">{nationality}</span>
+      <span className="creator__lifespan">{formatLifespan(birth, death)}</span>
+    </span>
+  </div>
+);
 
 export default Creator;

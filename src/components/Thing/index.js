@@ -5,7 +5,7 @@ import Creator from './Creator';
 
 const Thing = ({
   title,
-  images,
+  images = [],
   creators,
   creation_date: creationDate,
   medium_description: medium,
@@ -15,7 +15,8 @@ const Thing = ({
 }) => {
   const permittedImages = images.filter(image => image.permitted);
   const image = permittedImages.length ? <Masthead title={title} images={permittedImages} /> : null;
-  const date = creationDate.reduce(
+  const validDates = creationDate.filter(date => date !== null);
+  const date = validDates.reduce(
     (prev, current) => (!prev || prev === current ? current : `${prev} - ${current}`),
     ''
   );
@@ -31,13 +32,13 @@ const Thing = ({
               <h1 className="level-2 alt">{title}</h1>
 
               <div className="object__attributes">
-                {creators.length && (
+                {!!creators.length && (
                   <dl className="object__attributes-row">
                     <dt className="label">Creator(s):</dt>
                     <dd className="value">{creatorList}</dd>
                   </dl>
                 )}
-                {creationDate && (
+                {!!validDates.length && (
                   <dl className="object__attributes-row">
                     <dt className="label">Date:</dt>
                     <dd className="value">{date}</dd>
