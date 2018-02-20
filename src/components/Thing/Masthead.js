@@ -37,6 +37,9 @@ export default class Masthead extends Component {
   render() {
     const { title, images } = this.props;
     const { linkCopied, shareToolsOpen } = this.state;
+    const imgLink = `http://collection.cmoa.org/CollectionImage.aspx?irn=${
+      images[0].irn
+    }&size=Large`;
     return (
       <div>
         <section className="primary pad">
@@ -44,7 +47,7 @@ export default class Masthead extends Component {
             <div className="l-full">
               <article className="object">
                 <div className="object__image">
-                  <img src={images[0]} alt={title} />
+                  <img src={imgLink} alt={title} />
                 </div>
 
                 <div className="object__actions">

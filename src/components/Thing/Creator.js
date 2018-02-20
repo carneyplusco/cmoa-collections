@@ -4,9 +4,6 @@ import { extractId } from '../../util';
 const Creator = ({
   id, name, nationality, birth, death
 }) => {
-  const creatorNationality = nationality ? (
-    <span className="creator__nationality">{nationality},</span>
-  ) : null;
   const lifespan =
     birth && death ? (
       <span className="creator__lifespan">
@@ -20,7 +17,7 @@ const Creator = ({
         {name}
       </a>
       <span className="creator__meta">
-        {creatorNationality}
+        <span className="creator__nationality">{nationality}</span>
         {lifespan}
       </span>
     </div>

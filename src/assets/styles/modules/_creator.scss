@@ -1,12 +1,21 @@
-.creator__meta,
-.creator__nationality + .creator__lifespan {
+.creator__meta {
   margin-left: $small-spacing / 4;
+
+  &::before {
+    content: "(";
+  }
+
+  &::after {
+    content: ")";
+  }
 }
 
-.creator__meta::before {
-  content: "(";
-}
+.creator__lifespan::before {
+  content: ",";
+  margin-right: $small-spacing / 4;
 
-.creator__meta::after {
-  content: ")";
+  .creator__nationality:empty + & {
+    content: "";
+    margin-right: 0;
+  }
 }
