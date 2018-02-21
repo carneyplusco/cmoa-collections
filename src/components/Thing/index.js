@@ -5,7 +5,7 @@ import Creator from './Creator';
 
 const Thing = ({
   title,
-  images,
+  images = [],
   creators,
   creation_date: creationDate,
   medium_description: medium,
@@ -13,8 +13,10 @@ const Thing = ({
   accession_number: accessionNumber,
   current_location: location
 }) => {
-  const image = images.length ? <Masthead title={title} images={images} /> : null;
-  const date = creationDate.reduce(
+  const permittedImages = images.filter(image => image.permitted);
+  const image = permittedImages.length ? <Masthead title={title} images={permittedImages} /> : null;
+  const validDates = creationDate.filter(date => date !== null);
+  const date = validDates.reduce(
     (prev, current) => (!prev || prev === current ? current : `${prev} - ${current}`),
     ''
   );
@@ -29,50 +31,44 @@ const Thing = ({
             <article className="object">
               <h1 className="level-2 alt">{title}</h1>
 
-              <table className="object__attributes">
-                <thead>
-                  <tr>
-                    <th className="label" />
-                    <th className="value" />
-                  </tr>
-                  {creators.length && (
-                    <tr>
-                      <td className="label">Creator(s):</td>
-                      <td className="value">{creatorList}</td>
-                    </tr>
-                  )}
-                  {creationDate && (
-                    <tr>
-                      <td className="label">Date:</td>
-                      <td className="value">{date}</td>
-                    </tr>
-                  )}
-                  {medium && (
-                    <tr>
-                      <td className="label">Medium:</td>
-                      <td className="value">{medium}</td>
-                    </tr>
-                  )}
-                  {credit && (
-                    <tr>
-                      <td className="label">Credit:</td>
-                      <td className="value">{credit}</td>
-                    </tr>
-                  )}
-                  {accessionNumber && (
-                    <tr>
-                      <td className="label">Accession number:</td>
-                      <td className="value">{accessionNumber}</td>
-                    </tr>
-                  )}
-                  {location && (
-                    <tr>
-                      <td className="label">Location:</td>
-                      <td className="value">{location}</td>
-                    </tr>
-                  )}
-                </thead>
-              </table>
+              <div className="object__attributes">
+                {!!creators.length && (
+                  <dl className="object__attributes-row">
+                    <dt className="label">Creator(s):</dt>
+                    <dd className="value">{creatorList}</dd>
+                  </dl>
+                )}
+                {!!validDates.length && (
+                  <dl className="object__attributes-row">
+                    <dt className="label">Date:</dt>
+                    <dd className="value">{date}</dd>
+                  </dl>
+                )}
+                {medium && (
+                  <dl className="object__attributes-row">
+                    <dt className="label">Medium:</dt>
+                    <dd className="value">{medium}</dd>
+                  </dl>
+                )}
+                {credit && (
+                  <dl className="object__attributes-row">
+                    <dt className="label">Credit:</dt>
+                    <dd className="value">{credit}</dd>
+                  </dl>
+                )}
+                {accessionNumber && (
+                  <dl className="object__attributes-row">
+                    <dt className="label">Accession number:</dt>
+                    <dd className="value">{accessionNumber}</dd>
+                  </dl>
+                )}
+                {location && (
+                  <dl className="object__attributes-row">
+                    <dt className="label">Location:</dt>
+                    <dd className="value">{location}</dd>
+                  </dl>
+                )}
+              </div>
             </article>
           </div>
         </div>

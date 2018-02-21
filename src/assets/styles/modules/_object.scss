@@ -59,8 +59,16 @@
 
 .object__attributes {
   margin-bottom: $base-spacing;
+}
 
-  td {
+.object__attributes-row {
+  display: flex;
+  margin: 0;
+
+  .label,
+  .value {
+    display: inline-block;
+    margin: 0;
     padding: $small-spacing / 2 0;
 
     &.value::first-letter {
@@ -80,11 +88,15 @@
   }
 
   .label {
-    width: 30%;
+    flex-basis: 30%;
 
     @include grid-media($medium) {
-      width: 20%;
+      flex-basis: 25%;
     }
+  }
+
+  .value {
+    flex-basis: 50%;
   }
 }
 

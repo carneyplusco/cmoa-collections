@@ -24,9 +24,13 @@ const Result = ({ document, type }) => {
       {creator.name}
     </a>
   ));
-  const image = images.length ? (
+  const permittedImages = images.filter(image => image.permitted);
+  const image = permittedImages.length ? (
     <a href={itemLink}>
-      <img src={images[0]} alt={title} />
+      <img
+        src={`http://collection.cmoa.org/CollectionImage.aspx?irn=${images[0].irn}&size=Large`}
+        alt={title}
+      />
     </a>
   ) : (
     <NoImage link={itemLink} />
