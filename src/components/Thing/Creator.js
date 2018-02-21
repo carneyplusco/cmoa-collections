@@ -2,12 +2,17 @@ import React from 'react';
 import { extractId } from '../../util';
 
 function formatLifespan(birth, death) {
+  let lifespan;
+
   if (birth && !death) {
-    return `b. ${birth}`;
+    lifespan = `b. ${birth}`;
   } else if (death && !birth) {
-    return `d. ${death}</span>`;
+    lifespan = `d. ${death}</span>`;
+  } else if (birth && death) {
+    lifespan = `${birth}–${death}`;
   }
-  return `${birth}–${death}`;
+
+  return lifespan;
 }
 
 const Creator = ({

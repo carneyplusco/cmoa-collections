@@ -10,7 +10,7 @@
   }
 }
 
-.creator__lifespan::before {
+.creator__lifespan:not(:empty)::before {
   content: ",";
   margin-right: $small-spacing / 4;
 
